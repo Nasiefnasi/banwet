@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "409302874514",
+    "firebase_url": "https://smart-build-fcdb3.firebaseio.com",
+    "project_id": "smart-build-fcdb3",
+    "storage_bucket": "smart-build-fcdb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409302874514:android:057d7002685cbf572da94b",
+        "android_client_info": {
+          "package_name": "com.banwet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409302874514-fr54frh5id04kbeeo32fqf1sasggarnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt4KiivBToxep8Ko_i_GTXauLUVfgrv8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409302874514-fr54frh5id04kbeeo32fqf1sasggarnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409302874514:android:426dc1fda503e81f2da94b",
+        "android_client_info": {
+          "package_name": "com.genovatechnologies.smartbuild"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409302874514-hkms6m59sbsn4pth8nqdu18opm1r8h7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.genovatechnologies.smartbuild",
+            "certificate_hash": "163a6db5f1bcc35b886795d72fa04b1599cb5bce"
+          }
+        },
+        {
+          "client_id": "409302874514-fr54frh5id04kbeeo32fqf1sasggarnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt4KiivBToxep8Ko_i_GTXauLUVfgrv8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409302874514-fr54frh5id04kbeeo32fqf1sasggarnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
