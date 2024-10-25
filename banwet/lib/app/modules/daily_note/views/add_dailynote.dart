@@ -339,13 +339,15 @@ class SubmitButtons extends StatelessWidget {
   RxBool isLoading;
   void Function() onTap;
   final String text;
+  final color;
   final radius;
   SubmitButtons(
       {super.key,
       required this.isLoading,
       required this.onTap,
       required this.text,
-      this.radius});
+      this.radius,
+      this.color});
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -367,7 +369,8 @@ class SubmitButtons extends StatelessWidget {
           height: 7.h,
           width: 100.w,
           decoration: BoxDecoration(
-              color: bColor, borderRadius: BorderRadius.circular(radius ?? 10)),
+              color: color ?? bColor,
+              borderRadius: BorderRadius.circular(radius ?? 10)),
           child: Center(
             child: isLoading.isFalse
                 ? Text(

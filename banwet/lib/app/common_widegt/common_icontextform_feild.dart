@@ -65,7 +65,7 @@ class NewCaseTextField extends StatelessWidget {
             // border: Border.all(
             //     width: 1, color: Colors.black12), // Black border color
             // color: const Color.fromARGB(31, 255, 255, 255).withOpacity(0.02),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(1),
           ),
           // width: mediaquery.width * 9,
           child: Padding(
@@ -154,6 +154,7 @@ class NewCaseTextField extends StatelessWidget {
                 //   // ), // Black border color
                 //   borderRadius: BorderRadius.all(Radius.circular(12)),
                 // ),
+
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                       width: 1, color: bordercolor ?? Colors.black26),

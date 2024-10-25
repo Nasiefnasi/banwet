@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:banwet/app/data/model/quotationtemplate/templatemodel.dart';
 import 'package:banwet/app/data/service/quotationmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 // // // // /// / / / / /// / / / / /  / // /  / /   / / / / /  /SaleQuotationModel saleQuotationModelFromJson
 class QuotationController extends GetxController {
+  RxBool boxdetails = false.obs;
   var storage = GetStorage();
   TextEditingController startDateController = TextEditingController(
       text:
@@ -16,7 +18,7 @@ class QuotationController extends GetxController {
   TextEditingController endDateController =
       TextEditingController(text: DateTime.now().toString());
   List<Quotationlist> quotationlist = <Quotationlist>[].obs;
-  SaleQuotationModel? salequotation;
+  RxList<Quotationtempla> selectiteam = <Quotationtempla>[].obs;
 // Rxbool Is
   @override
   void onInit() {
@@ -67,8 +69,14 @@ class QuotationController extends GetxController {
     }
   }
 
+  SaleQuotationModel? salequotation;
+  RxBool quotationloading = false.obs;
   getquotation() async {
+    print({storage.read('uid').toString()});
+    print(storage.read("domain"));
     try {
+      quotationloading.value = true;
+      update();
       var headers = {
         'x-api-key': '159753',
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -83,12 +91,41 @@ class QuotationController extends GetxController {
       http.StreamedResponse response = await request.send();
       var responsebody = await response.stream.bytesToString();
       if (response.statusCode == 200 || response.statusCode == 201) {
-        salequotation = saleQuotationModelFromJson(responsebody);
+        salequotation = await saleQuotationModelFromJson(responsebody);
+        quotationloading.value = false;
+        update();
       } else {
         print(response.reasonPhrase);
+        quotationloading.value = false;
+        update();
       }
       // ignore: empty_catches
-    } catch (e) {}
+    } catch (e) {
+      quotationloading.value = false;
+      update();
+    }
+  }
+
+  QuotationTemplateModel? quotationTemplate;
+  gettemplatequotation() async {
+    var headers = {
+      'x-api-key': '159753',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            '${storage.read("domain")}sales_quotation/select_templates?user_id=${storage.read('uid').toString()}'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    var responsebody = await response.stream.bytesToString();
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      quotationTemplate = await quotationTemplateModelFromJson(responsebody);
+    } else {
+      print(response.reasonPhrase);
+    }
   }
 }
 

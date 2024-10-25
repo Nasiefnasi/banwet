@@ -24,9 +24,10 @@ class Salesquotation extends GetView<QuotationController> {
               padding: const EdgeInsets.only(left: 10),
               child: ProjectNameTitile(
                 screenTitile: "Quotation",
-                onTap: () {
+                onTap: () async {
+                  await controller.gettemplatequotation();
                   // return addestimation(context);
-                  Get.to(const Selectitams());
+                  Get.to(Selectitams());
                 },
               ),
             ),
@@ -54,60 +55,69 @@ class Salesquotation extends GetView<QuotationController> {
             ),
             Expanded(
                 child: GetBuilder<QuotationController>(
-              builder: (controller) => controller.salequotation == null
-                  ? Column(
-                      children: [
-                        h5,
-                        Center(child: loadingthreebounce),
-                      ],
-                    )
-                  : controller.salequotation!.data.isEmpty
-                      ? Center(
-                          child: Lottie.asset(
-                              repeat: false,
-                              "assets/images/qrbRtDHknE.json",
-                              height: 250),
-                        )
-                      : ListView.builder(itemBuilder: (context, index) {
-                          var details = controller.salequotation!.data[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Container(
-                              // height: ,
-                              // width: 800,
+              builder: (controller) => Obx(
+                () => controller.quotationloading.value
+                    ? Column(
+                        children: [
+                          h5,
+                          Center(child: loadingthreebounce),
+                        ],
+                      )
+                    : controller.salequotation == null ||
+                            controller.salequotation!.data.isEmpty
+                        ? Center(
+                            child: Lottie.asset(
+                                // repeat: false,
+                                "assets/images/qrbRtDHknE.json",
+                                height: 250),
+                          )
+                        : ListView.builder(
+                            itemCount: controller.salequotation!.data.length,
+                            itemBuilder: (context, index) {
+                              var details =
+                                  controller.salequotation!.data[index];
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Container(
+                                  // height: ,
+                                  // width: 800,
 
-                              decoration: BoxDecoration(
-                                  color: bColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 15),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Quotation ID",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: Medium,
-                                          color: Colors.white),
+                                  decoration: BoxDecoration(
+                                      color: bColor,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 15),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Quotation ID",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: Medium,
+                                              color: Colors.white),
+                                        ),
+                                        h1,
+                                        Text(
+                                          "Quotation Date",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: regular,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    h1,
-                                    Text(
-                                      "Quotation Date",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: regular,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          );
-                        }),
+                              );
+                            }),
+              ),
               init: QuotationController(),
             ))
           ],
