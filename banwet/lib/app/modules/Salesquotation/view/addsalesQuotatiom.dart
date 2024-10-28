@@ -46,6 +46,8 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                     ),
                     controller: TextEditingController(),
                     validator: (p0) {
+                      return null;
+
                       // if (controller.expTypeCtrl.text.isEmpty) {
                       //   return '';
                       // } else if (!controller.expType
@@ -79,7 +81,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                         borderSide: BorderSide(width: 1, color: Colors.black26),
                       ),
                     ),
-                    suggestions: []
+                    suggestions: const []
                     //  controller.expType
                     //     .map(
                     //       (e) => SearchFieldListItem(
@@ -187,7 +189,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
               ),
               h1,
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: false,
                 itemBuilder: (context, index) =>
                     selectquotationdetails(context),
@@ -297,8 +299,8 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                           Radius.circular(controller.boxdetails.value ? 0 : 10),
                       bottomRight:
                           Radius.circular(controller.boxdetails.value ? 0 : 10),
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))),
+                      topLeft: const Radius.circular(10),
+                      topRight: const Radius.circular(10))),
             ),
           ),
         ),
@@ -523,7 +525,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                                       style: TextStyle(
                                           fontSize: 12, fontFamily: regular),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       height: 4.h,
                                       // width: 30.w,
                                       child: Center(
@@ -555,7 +557,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                                       style: TextStyle(
                                           fontSize: 12, fontFamily: regular),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       height: 4.h,
                                       // width: 30.w,
                                       child: Center(
@@ -587,7 +589,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                                       style: TextStyle(
                                           fontSize: 12, fontFamily: Medium),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       height: 4.h,
                                       // width: 30.w,
                                       child: Center(
@@ -614,12 +616,12 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                               Container(
                                 width: 8.w,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.horizontal(
+                                  borderRadius: const BorderRadius.horizontal(
                                       right: Radius.circular(10)),
                                   color: bColor,
                                 ),
                                 height: mediaquer.height,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.edit,
                                   color: Colors.white,
                                 ),
@@ -642,7 +644,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         )
       ],
     );

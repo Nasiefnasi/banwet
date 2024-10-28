@@ -91,7 +91,7 @@ class QuotationController extends GetxController {
       http.StreamedResponse response = await request.send();
       var responsebody = await response.stream.bytesToString();
       if (response.statusCode == 200 || response.statusCode == 201) {
-        salequotation = await saleQuotationModelFromJson(responsebody);
+        salequotation = saleQuotationModelFromJson(responsebody);
         quotationloading.value = false;
         update();
       } else {
@@ -122,7 +122,7 @@ class QuotationController extends GetxController {
     http.StreamedResponse response = await request.send();
     var responsebody = await response.stream.bytesToString();
     if (response.statusCode == 200 || response.statusCode == 201) {
-      quotationTemplate = await quotationTemplateModelFromJson(responsebody);
+      quotationTemplate = quotationTemplateModelFromJson(responsebody);
     } else {
       print(response.reasonPhrase);
     }
