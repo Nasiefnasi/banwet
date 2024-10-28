@@ -317,34 +317,67 @@ class Selectitams extends GetView<QuotationController> {
                 }
                 return null;
               },
-              onSelectionChange: (selectedItems) {
-                for (var item in selectedItems) {
-                  if (item != null) {
-                    controller.quotationlist.value.clear();
-                    debugPrint("Selected Item: ${item.createdDate}");
-                    var adddetails = Quotationlist(
-                      area: "0",
-                      description: item.description,
-                      method: item.methodOfApplication,
-                      notes: item.notes,
-                      products: item.products,
-                      sub_title: item.subTitle,
-                      template_id: item.templateId,
-                      title: item.title,
-                      total_amount: "0",
-                      unit_price: item.unitPrice,
-                      warranty: item.warranty,
-                    );
-                    controller.quotationlist.value.add(adddetails);
+              // onSelectionChange: (selectedItems) {
+              //   // for (var item in selectedItems) {
+              //   //   if (item != null) {
+              //   //     // controller.quotationlist.value.clear();
+              //   //     debugPrint("Selected Item: ${item.createdDate}");
+              //   //     var adddetails = Quotationlist(
+              //   //       area: "0",
+              //   //       description: item.description,
+              //   //       method: item.methodOfApplication,
+              //   //       notes: item.notes,
+              //   //       products: item.products,
+              //   //       sub_title: item.subTitle,
+              //   //       template_id: item.templateId,
+              //   //       title: item.title,
+              //   //       total_amount: "0",
+              //   //       unit_price: item.unitPrice,
+              //   //       warranty: item.warranty,
+              //   //     );
+              //   //     controller.quotationlist.value.add(adddetails);
 
-                    print(
-                        "the ithshhhs"); // Replace 'createdBy' with the field you need to print
-                  } else {
-                    debugPrint("Selected Item is null");
-                  }
-                }
-                print(controller.quotationlist.value.length);
-              },
+              //   //     print(
+              //   //         "the ithshhhs"); // Replace 'createdBy' with the field you need to print
+              //   //   } else {
+              //   //     debugPrint("Selected Item is null");
+              //   //   }
+              //   // }
+              //   print(controller.quotationlist.value.length);
+              // },
+              onSelectionChange: (selectedItems) {
+  // Clear the current quotationlist
+  controller.quotationlist.clear();
+
+  // Add each selected item as a new Quotationlist entry
+  for (var item in selectedItems) {
+    if (item != null) {
+      // Map the selected Quotationtempla item to a Quotationlist object
+      var quotationItem = Quotationlist(
+        template_id: item.templateId,
+        title: item.title,
+        sub_title: item.subTitle,
+        description: item.description,
+        products: item.products,
+        unit_price: item.unitPrice,
+        warranty: item.warranty,
+        method: item.methodOfApplication,
+        area: "",
+        total_amount:"",
+        notes: item.notes,
+      );
+
+      // Add the mapped item to the observable list
+      controller.quotationlist.add(quotationItem);
+      debugPrint("Added Item: ${quotationItem.title}");
+    } else {
+      debugPrint("Selected Item is null");
+    }
+  }
+
+  // Print the current count of items in quotationlist for debugging
+  print("Total items in quotationlist: ${controller.quotationlist.length}");
+},
             ),
           ),
         ),
