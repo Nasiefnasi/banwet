@@ -262,7 +262,7 @@ class AddSalesQuotatiom extends GetView<QuotationController> {
       children: [
         Obx(
           () => InkWell(
-            radius: 10,
+            radius: ,
             onTap: () {
               controller.boxdetails.value = !controller.boxdetails.value;
               print(controller.boxdetails.value);
