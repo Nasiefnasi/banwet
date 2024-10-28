@@ -261,8 +261,8 @@ class Selectitams extends GetView<QuotationController> {
           isLoading: false.obs,
           onTap: () {
             if (_formKey.currentState!.validate() &&
-                controller.selectiteam.value.isNotEmpty) {
-              Get.to(const AddSalesQuotatiom());
+                controller.quotationlist.value.isNotEmpty) {
+              Get.to(const AddSalesQuotation());
             }
           },
           text: "Submit",
@@ -320,9 +320,22 @@ class Selectitams extends GetView<QuotationController> {
               onSelectionChange: (selectedItems) {
                 for (var item in selectedItems) {
                   if (item != null) {
-                    controller.selectiteam.value.clear();
+                    controller.quotationlist.value.clear();
                     debugPrint("Selected Item: ${item.createdDate}");
-                    controller.selectiteam.value.addAll(selectedItems.toList());
+                    var adddetails = Quotationlist(
+                      area: "0",
+                      description: item.description,
+                      method: item.methodOfApplication,
+                      notes: item.notes,
+                      products: item.products,
+                      sub_title: item.subTitle,
+                      template_id: item.templateId,
+                      title: item.title,
+                      total_amount: "0",
+                      unit_price: item.unitPrice,
+                      warranty: item.warranty,
+                    );
+                    controller.quotationlist.value.add(adddetails);
 
                     print(
                         "the ithshhhs"); // Replace 'createdBy' with the field you need to print
@@ -330,7 +343,7 @@ class Selectitams extends GetView<QuotationController> {
                     debugPrint("Selected Item is null");
                   }
                 }
-                print(controller.selectiteam.value.length);
+                print(controller.quotationlist.value.length);
               },
             ),
           ),

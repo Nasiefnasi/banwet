@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 QuotationTemplateModel quotationTemplateModelFromJson(String str) =>
     QuotationTemplateModel.fromJson(json.decode(str));
 
@@ -50,6 +52,8 @@ class Quotationtempla {
   final String? createdBy;
   final DateTime? createdDate;
   final String? deleteStatus;
+
+  RxBool istrue = false.obs;
 
   Quotationtempla({
     this.templateId,

@@ -5,20 +5,31 @@ import 'package:banwet/app/data/service/quotationmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+// import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 // // // // /// / / / / /// / / / / /  / // /  / /   / / / / /  /SaleQuotationModel saleQuotationModelFromJson
 class QuotationController extends GetxController {
+  var quotationtype =["Product","Service"];
   RxBool boxdetails = false.obs;
+  TextEditingController title = TextEditingController();
+  TextEditingController subtitle = TextEditingController();
+  TextEditingController description = TextEditingController();
+  // TextEditingController products = TextEditingController();
+  TextEditingController warranty = TextEditingController();
+  TextEditingController methodapplication = TextEditingController();
+    TextEditingController notes = TextEditingController();
+   RxString products = "".obs;
   var storage = GetStorage();
   TextEditingController startDateController = TextEditingController(
       text:
           DateFormat("yyyy-MM-dd").parse(DateTime.now().toString()).toString());
   TextEditingController endDateController =
       TextEditingController(text: DateTime.now().toString());
-  List<Quotationlist> quotationlist = <Quotationlist>[].obs;
-  RxList<Quotationtempla> selectiteam = <Quotationtempla>[].obs;
+   RxList<Quotationlist> quotationlist = <Quotationlist>[].obs;
+  // RxList<Quotationtempla> selectiteam = <Quotationtempla>[].obs;
+  TextEditingController Approxsqft = TextEditingController();
 // Rxbool Is
   @override
   void onInit() {
@@ -141,6 +152,7 @@ class Quotationlist {
   String? area;
   String? total_amount;
   String? notes;
+  RxBool istrue = false.obs;
 
   Quotationlist({
     this.template_id,
