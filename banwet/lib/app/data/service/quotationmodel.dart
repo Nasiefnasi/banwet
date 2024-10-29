@@ -8,7 +8,7 @@ String saleQuotationModelToJson(SaleQuotationModel data) =>
 
 class SaleQuotationModel {
   final bool status;
-  final List<Datum> data;
+  final List<QuotationList> data;
 
   SaleQuotationModel({
     required this.status,
@@ -18,7 +18,7 @@ class SaleQuotationModel {
   factory SaleQuotationModel.fromJson(Map<String, dynamic> json) =>
       SaleQuotationModel(
         status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<QuotationList>.from(json["data"].map((x) => QuotationList.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -27,7 +27,7 @@ class SaleQuotationModel {
       };
 }
 
-class Datum {
+class QuotationList {
   final String quotationId;
   final String quotationNo;
   final String date;
@@ -44,7 +44,7 @@ class Datum {
   final String itemDetails;
   final String printUrl;
 
-  Datum({
+  QuotationList({
     required this.quotationId,
     required this.quotationNo,
     required this.date,
@@ -62,7 +62,7 @@ class Datum {
     required this.printUrl,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory QuotationList.fromJson(Map<String, dynamic> json) => QuotationList(
         quotationId: json["quotation_id"],
         quotationNo: json["quotation_no"],
         date: json["date"],

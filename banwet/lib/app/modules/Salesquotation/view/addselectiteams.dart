@@ -346,38 +346,40 @@ class Selectitams extends GetView<QuotationController> {
               //   print(controller.quotationlist.value.length);
               // },
               onSelectionChange: (selectedItems) {
-  // Clear the current quotationlist
-  controller.quotationlist.clear();
+                // Clear the current quotationlist
+                controller.quotationlist.clear();
 
-  // Add each selected item as a new Quotationlist entry
-  for (var item in selectedItems) {
-    if (item != null) {
-      // Map the selected Quotationtempla item to a Quotationlist object
-      var quotationItem = Quotationlist(
-        template_id: item.templateId,
-        title: item.title,
-        sub_title: item.subTitle,
-        description: item.description,
-        products: item.products,
-        unit_price: item.unitPrice,
-        warranty: item.warranty,
-        method: item.methodOfApplication,
-        area: "",
-        total_amount:"",
-        notes: item.notes,
-      );
+                // Add each selected item as a new Quotationlist entry
+                for (var item in selectedItems) {
+                  if (item != null) {
+                    // Map the selected Quotationtempla item to a Quotationlist object
+                    var quotationItem = Quotationlist(
+                      template_id: item.templateId,
+                      title: item.title,
+                      sub_title: item.subTitle,
+                      description: item.description,
+                      products: item.products,
+                      unit_price: item.unitPrice,
+                      warranty: item.warranty,
+                      method: item.methodOfApplication,
+                      area: "0",
+                      total_amount: "0",
+                      notes: item.notes,
+                    );
 
-      // Add the mapped item to the observable list
-      controller.quotationlist.add(quotationItem);
-      debugPrint("Added Item: ${quotationItem.title}");
-    } else {
-      debugPrint("Selected Item is null");
-    }
-  }
+                    // Add the mapped item to the observable list
+                    controller.quotationlist.add(quotationItem);
+                    // controller.selectiteam.add(quotationItem);
+                    debugPrint("Added Item: ${quotationItem.title}");
+                  } else {
+                    debugPrint("Selected Item is null");
+                  }
+                }
 
-  // Print the current count of items in quotationlist for debugging
-  print("Total items in quotationlist: ${controller.quotationlist.length}");
-},
+                // Print the current count of items in quotationlist for debugging
+                print(
+                    "Total items in quotationlist: ${controller.quotationlist.length}");
+              },
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:banwet/app/common_widegt/submitpage.dart';
 import 'package:banwet/app/data/model/quotationtemplate/templatemodel.dart';
 import 'package:banwet/app/data/service/quotationmodel.dart';
 import 'package:flutter/material.dart';
@@ -11,25 +12,36 @@ import 'package:http/http.dart' as http;
 
 // // // // /// / / / / /// / / / / /  / // /  / /   / / / / /  /SaleQuotationModel saleQuotationModelFromJson
 class QuotationController extends GetxController {
-  var quotationtype =["Product","Service"];
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var quotationtype = ["Product", "Service"];
   RxBool boxdetails = false.obs;
+  TextEditingController approxsqfts = TextEditingController();
+  TextEditingController amountsqft = TextEditingController();
+
   TextEditingController title = TextEditingController();
   TextEditingController subtitle = TextEditingController();
   TextEditingController description = TextEditingController();
   // TextEditingController products = TextEditingController();
   TextEditingController warranty = TextEditingController();
   TextEditingController methodapplication = TextEditingController();
-    TextEditingController notes = TextEditingController();
-   RxString products = "".obs;
+  TextEditingController notes = TextEditingController();
+  RxString products = "".obs;
   var storage = GetStorage();
   TextEditingController startDateController = TextEditingController(
       text:
           DateFormat("yyyy-MM-dd").parse(DateTime.now().toString()).toString());
   TextEditingController endDateController =
       TextEditingController(text: DateTime.now().toString());
-   RxList<Quotationlist> quotationlist = <Quotationlist>[].obs;
-  // RxList<Quotationtempla> selectiteam = <Quotationtempla>[].obs;
+  RxList<Quotationlist> quotationlist = <Quotationlist>[].obs;
   TextEditingController Approxsqft = TextEditingController();
+  TextEditingController quotationtypes = TextEditingController();
+  TextEditingController customername = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController state = TextEditingController();
+  TextEditingController quotationdate =
+      TextEditingController(text: DateTime.now().toString());
+  TextEditingController expirydate =
+      TextEditingController(text: DateTime.now().toString());
 // Rxbool Is
   @override
   void onInit() {
@@ -45,14 +57,42 @@ class QuotationController extends GetxController {
     update();
   }
 
+  RxDouble totalamount = 0.0.obs;
+  calculation() {
+    totalamount.value =
+        double.parse(approxsqfts.text) * double.parse(amountsqft.text);
+    update();
+  }
+
+  clear() {
+    approxsqfts.clear();
+    amountsqft.clear();
+    title.clear();
+    subtitle.clear();
+    description.clear();
+    warranty.clear();
+    methodapplication.clear();
+    notes.clear();
+    products.value = "";
+    quotationlist.clear();
+    Approxsqft.clear();
+    quotationtypes.clear();
+    customername.clear();
+    address.clear();
+    state.clear();
+    totalamount.value = 0.0;
+    startDateController.text = DateTime.now().toString();
+  }
+
   postcreatesalesquotation(
-    quotation_date,
-    customer_name,
-    address,
-    state,
-    expiry_date,
-    quotation_type,
-  ) async {
+      // quotation_date,
+      // customer_name,
+      // addres,
+      // state,
+      // expiry_date,
+      // quotation_type,
+      ) async {
+    print(quotationtypes.text);
     var headers = {
       'x-api-key': '159753',
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -61,20 +101,25 @@ class QuotationController extends GetxController {
         'POST', Uri.parse('${storage.read("domain")}sales_quotation/create'));
     request.bodyFields = {
       'user_id': storage.read('uid').toString(),
-      'quotation_date': '',
-      'customer_name': '',
-      'address': '',
-      'state': '',
-      'expiry_date': '',
-      'quotation_type': '',
+      'quotation_date': quotationdate.text,
+      'customer_name': customername.text,
+      'address': address.text,
+      'state': state.text,
+      'expiry_date': expirydate.text,
+      'quotation_type': quotationtypes.text,
       'items': jsonEncode(quotationlist)
     };
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      getquotation();
+
+      update();
+      await Get.to(() => const SubmitDone());
+      Get.back();
+      clear();
     } else {
       print(response.reasonPhrase);
     }
@@ -88,6 +133,7 @@ class QuotationController extends GetxController {
     try {
       quotationloading.value = true;
       update();
+
       var headers = {
         'x-api-key': '159753',
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -104,6 +150,7 @@ class QuotationController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         salequotation = saleQuotationModelFromJson(responsebody);
         quotationloading.value = false;
+        filterQuotaiondate();
         update();
       } else {
         print(response.reasonPhrase);
@@ -115,6 +162,26 @@ class QuotationController extends GetxController {
       quotationloading.value = false;
       update();
     }
+  }
+   var dateFormat = DateFormat('dd-MM-yyyy');
+  RxList<QuotationList> flterdetails =<QuotationList> [].obs;
+  filterQuotaiondate(){
+    if(salequotation!=null||salequotation!.data!=null){for(int i=0;i<salequotation!.data.length;i++){
+      if(dateFormat
+                  .parse(salequotation!.data[i].createdDate)
+                  .compareTo(DateTime.parse(startDateController.text)) >=
+              0 &&
+          dateFormat
+                  .parse(salequotation!.data[i].createdDate)
+                  .compareTo(DateTime.parse(endDateController.text)) <=
+              0){
+              flterdetails.add(salequotation!.data[i]);  
+              update();
+
+      }
+
+    }}
+    
   }
 
   QuotationTemplateModel? quotationTemplate;

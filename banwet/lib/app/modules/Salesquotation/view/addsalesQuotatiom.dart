@@ -1,5 +1,5 @@
 import 'package:banwet/app/Style/const.dart';
-import 'package:banwet/app/data/model/quotationtemplate/templatemodel.dart';
+import 'package:banwet/app/common_widegt/datatimepicker.dart';
 import 'package:banwet/app/index.dart';
 import 'package:banwet/app/modules/Salesquotation/controller/salequotation.dart';
 import 'package:banwet/app/modules/daily_note/views/add_dailynote.dart';
@@ -11,432 +11,215 @@ import 'package:get/get.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:sizer/sizer.dart';
 
-// class AddSalesQuotatiom extends GetView<QuotationController> {
-//   const AddSalesQuotatiom({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       bottomNavigationBar:
-//           SubmitButtons(isLoading: false.obs, onTap: () {}, text: "Submit"),
-//       body: Padding(
-//         padding: const EdgeInsets.all(10),
-//         child: SafeArea(
-//             child: SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               h1,
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 10),
-//                 child: ProjectNameTitile(
-//                   addbutton: const SizedBox(),
-//                   screenTitile: "Add Quotation",
-//                   onTap: () {},
-//                 ),
-//               ),
-//               h1,
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 1),
-//                 child: SearchField(
-//                     searchStyle:
-//                         header11.copyWith(color: Colors.black, fontSize: 11.sp),
-//                     suggestionItemDecoration: BoxDecoration(
-//                       color: bColor2,
-//                     ),
-//                     suggestionStyle: header11.copyWith(
-//                       color: Colors.black54,
-//                     ),
-//                     controller: TextEditingController(),
-//                     validator: (p0) {
-//                       return null;
-
-//                       // if (controller.expTypeCtrl.text.isEmpty) {
-//                       //   return '';
-//                       // } else if (!controller.expType
-//                       //     .any((e) => e.toString() == p0)) {
-//                       //   return 'Invalid Expense Type';
-//                       // } else {
-//                       //   return null;
-//                       // }
-//                     },
-//                     searchInputDecoration: InputDecoration(
-//                       labelText: 'Expense Type',
-//                       hintStyle: header11.copyWith(
-//                         fontSize: 11.sp,
-//                         color: Colors.black54,
-//                       ),
-//                       labelStyle: header11.copyWith(
-//                           color: Colors.black54, fontSize: 12.sp),
-//                       suffixIcon:
-//                           const Icon(Icons.arrow_drop_down, color: Colors.grey),
-//                       icon: CachedNetworkImage(
-//                         imageUrl:
-//                             "https://cdn-icons-png.flaticon.com/512/9298/9298945.png",
-//                         color: Colors.black38,
-//                         height: 3.h,
-//                         width: 7.w,
-//                         placeholder: (context, url) => const SizedBox(),
-//                         errorWidget: (context, url, error) =>
-//                             const Icon(Icons.error),
-//                       ),
-//                       enabledBorder: const UnderlineInputBorder(
-//                         borderSide: BorderSide(width: 1, color: Colors.black26),
-//                       ),
-//                     ),
-//                     suggestions: const []
-//                     //  controller.expType
-//                     //     .map(
-//                     //       (e) => SearchFieldListItem(
-//                     //         e.toString(),
-//                     //         child: Text('  ${e.toString()}', style: header11),
-//                     //         item: e.toString(),
-//                     //       ),
-//                     //     )
-//                     //     .toList(),
-//                     // onSuggestionTap: (val){
-//                     //   headId=val.item;
-//                     //
-//                     // },
-//                     ),
-//               ),
-//               NewCaseTextField(
-//                   validator: Validators.noneEmptyValidator,
-//                   labelstyle: header11.copyWith(
-//                     color: Colors.black54,
-//                   ),
-//                   mediaquery: MediaQuery.of(context).size,
-//                   controller: TextEditingController(),
-//                   keyboard: TextInputType.name,
-//                   label: "Quotation Type",
-//                   icon: SizedBox(
-//                       height: 3.6.h,
-//                       child: Image.asset("assets/images/quotationtype.png"))),
-//               h1,
-//               NewCaseTextField(
-//                   validator: Validators.noneEmptyValidator,
-//                   labelstyle: header11.copyWith(
-//                     color: Colors.black54,
-//                   ),
-//                   mediaquery: MediaQuery.of(context).size,
-//                   controller: TextEditingController(),
-//                   keyboard: TextInputType.name,
-//                   label: "Customer Name",
-//                   icon: SizedBox(
-//                       height: 3.6.h,
-//                       child: Image.asset("assets/images/quotationtype.png"))),
-//               h1,
-//               NewCaseTextField(
-//                   validator: Validators.noneEmptyValidator,
-//                   labelstyle: header11.copyWith(
-//                     color: Colors.black54,
-//                   ),
-//                   mediaquery: MediaQuery.of(context).size,
-//                   controller: TextEditingController(),
-//                   keyboard: TextInputType.name,
-//                   label: "Address",
-//                   icon: SizedBox(
-//                       height: 3.6.h,
-//                       child: Image.asset("assets/images/addresa.png"))),
-//               h1,
-//               NewCaseTextField(
-//                   validator: Validators.noneEmptyValidator,
-//                   labelstyle: header11.copyWith(
-//                     color: Colors.black54,
-//                   ),
-//                   mediaquery: MediaQuery.of(context).size,
-//                   controller: TextEditingController(),
-//                   keyboard: TextInputType.name,
-//                   label: "State",
-//                   icon: SizedBox(
-//                       height: 3.6.h,
-//                       child: Image.asset("assets/images/quotationtype.png"))),
-//               h1,
-//               SizedBox(
-//                 height: 56,
-//                 width: double.infinity,
-//                 child: Row(
-//                   children: [
-//                     Expanded(
-//                       child: NewCaseTextField(
-//                           validator: Validators.noneEmptyValidator,
-//                           labelstyle: header11.copyWith(
-//                             color: Colors.black54,
-//                           ),
-//                           mediaquery: MediaQuery.of(context).size,
-//                           controller: TextEditingController(),
-//                           keyboard: TextInputType.name,
-//                           label: "Quotation  Date",
-//                           icon: SizedBox(
-//                               height: 3.h,
-//                               child:
-//                                   Image.asset("assets/images/dateicon.png"))),
-//                     ),
-//                     Expanded(
-//                       child: NewCaseTextField(
-//                           validator: Validators.noneEmptyValidator,
-//                           labelstyle: header11.copyWith(
-//                             color: Colors.black54,
-//                           ),
-//                           mediaquery: MediaQuery.of(context).size,
-//                           controller: TextEditingController(),
-//                           keyboard: TextInputType.name,
-//                           label: "Expiry Date",
-//                           icon: SizedBox(
-//                               height: 3.h,
-//                               child:
-//                                   Image.asset("assets/images/dateicon.png"))),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               h1,
-//               CardDetails()
-//               // ListView.builder(
-//               //   physics: const NeverScrollableScrollPhysics(),
-//               //   shrinkWrap: false,
-//               //   itemBuilder: (context, index) =>
-//               //       selectquotationdetails(context),
-//               // ),
-//               // selectquotationdetails(context),
-//               // Padding(
-//               //   padding: const EdgeInsets.only(),
-//               //   child: Container(
-//               //     constraints: const BoxConstraints(maxHeight: 63),
-//               //     child: SearchField(
-//               //       searchStyle: header11.copyWith(
-//               //         color: Colors.black,
-//               //       ),
-
-//               //       suggestionItemDecoration: BoxDecoration(color: bColor2),
-//               //       // validator: Validators.noneEmptyValidator,
-//               //       // controller: controller.selectcontractor,
-//               //       suggestionStyle: header10.copyWith(
-//               //           color: Colors.black87, fontFamily: light),
-//               //       searchInputDecoration: InputDecoration(
-//               //         labelText: 'Quotation Type',
-//               //         labelStyle: header11.copyWith(
-//               //           color: Colors.black54,
-//               //         ),
-//               //         suffixIcon:
-//               //             const Icon(Icons.arrow_drop_down, color: Colors.grey),
-//               //         icon: cImage(
-//               //             "https://cdn-icons-png.flaticon.com/512/3135/3135791.png"),
-//               //         enabledBorder: const UnderlineInputBorder(
-//               //           borderSide: BorderSide(
-//               //               color:
-//               //                   //  iserror.value != false
-//               //                   //     ? Colors.red
-//               //                   //     :
-//               //                   Colors.black26,
-//               //               width: 1.0),
-//               //         ),
-//               //       ),
-//               //       // suggestions: controller1.selectedDropdowndataModel!.contractors
-//               //       //     .map(
-//               //       //       (e) => SearchFieldListItem(
-//               //       //         e.contractorName.toString(),
-//               //       //         child: Text(
-//               //       //           "  ${e.contractorName}",
-//               //       //           style: header10,
-//               //       //         ),
-//               //       //         item: e.contractorId,
-//               //       //       ),
-//               //       //     )
-//               //       //     .toList(),
-//               //       suggestions: [],
-//               //       onSuggestionTap: (value) {
-//               //         // controller.contractor.value = value.item.toString();
-//               //         print(value.item.toString());
-//               //         // type = value.item;
-//               //         // print(_workType.text);
-//               //         // print(type);
-//               //       },
-//               //     ),
-//               //   ),
-//               // ),
-//             ],
-//           ),
-//         )),
-//       ),
-//     );
-//   }
-
-// }
 class AddSalesQuotation extends GetView<QuotationController> {
   const AddSalesQuotation({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SubmitButtons(
-        isLoading: false.obs,
-        onTap: () {},
-        text: "Submit",
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: SubmitButtons(
+          isLoading: false.obs,
+          onTap: () {
+            if (controller.formKey.currentState!.validate()) {
+              controller.postcreatesalesquotation();
+            }
+          },
+          text: "Submit",
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                // Header or title widget
-                SizedBox(
-                    height:
-                        16), // Replace with actual `h1` padding if necessary
+          child: Form(
+            key: controller.formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  // Header or title widget
+                  SizedBox(
+                      height:
+                          16), // Replace with actual `h1` padding if necessary
 
-                ProjectNameTitile(
-                  addbutton: const SizedBox(),
-                  screenTitile: "Add Quotation",
-                  onTap: () {},
-                ),
+                  ProjectNameTitile(
+                    addbutton: const SizedBox(),
+                    screenTitile: "Add Quotation",
+                    onTap: () {},
+                  ),
 
-                SizedBox(height: 16), // Replace with `h1`
+                  SizedBox(height: 16), // Replace with `h1`
 
-                // Search Field
-                SearchField(
-                  searchStyle:
-                      header11.copyWith(color: Colors.black, fontSize: 11.sp),
-                  suggestionItemDecoration: BoxDecoration(color: bColor2),
-                  suggestionStyle: header11.copyWith(color: Colors.black54),
-                  controller: TextEditingController(),
-                  validator: (p0) {
-                    return null;
-                  },
-                  searchInputDecoration: InputDecoration(
-                    labelText: "Quotation Type",
-                    hintStyle: header11.copyWith(
-                        fontSize: 11.sp, color: Colors.black54),
-                    labelStyle: header11.copyWith(
-                        color: Colors.black54, fontSize: 12.sp),
-                    suffixIcon:
-                        const Icon(Icons.arrow_drop_down, color: Colors.grey),
+                  // Search Field
+                  SearchField(
+                    searchStyle:
+                        header11.copyWith(color: Colors.black, fontSize: 11.sp),
+                    suggestionItemDecoration: BoxDecoration(color: bColor2),
+                    suggestionStyle: header11.copyWith(color: Colors.black54),
+                    controller: controller.quotationtypes,
+                  validator: Validators.noneEmptyValidator,
+                    searchInputDecoration: InputDecoration(
+                      labelText: "Quotation Type",
+                      hintStyle: header11.copyWith(
+                          fontSize: 11.sp, color: Colors.black54),
+                      labelStyle: header11.copyWith(
+                          color: Colors.black54, fontSize: 12.sp),
+                      suffixIcon:
+                          const Icon(Icons.arrow_drop_down, color: Colors.grey),
+                      icon: SizedBox(
+                        height: 3.6.h,
+                        child: Image.asset("assets/images/quotationtype.png"),
+                      ),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: Colors.black26),
+                      ),
+                    ),
+                    suggestions: controller.quotationtype
+                        .map((e) => SearchFieldListItem(
+                              e,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(e,
+                                    style:
+                                        header11.copyWith(color: Colors.black)),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+
+                  // SizedBox(height: 16),
+
+                  // Text fields
+                  // NewCaseTextField(
+                  //   validator: Validators.noneEmptyValidator,
+                  //   labelstyle: header11.copyWith(color: Colors.black54),
+                  //   mediaquery: MediaQuery.of(context).size,
+                  //   controller: TextEditingController(),
+                  //   keyboard: TextInputType.name,
+                  //   label: "Quotation Type",
+                  //   icon: SizedBox(
+                  //     height: 3.6.h,
+                  //     child: Image.asset("assets/images/quotationtype.png"),
+                  //   ),
+                  // ),
+
+                  SizedBox(height: 16), // Replace with `h1`
+
+                  NewCaseTextField(
+                    validator: Validators.noneEmptyValidator,
+                    labelstyle: header11.copyWith(color: Colors.black54),
+                    mediaquery: MediaQuery.of(context).size,
+                    controller: controller.customername,
+                    keyboard: TextInputType.name,
+                    label: "Customer Name",
                     icon: SizedBox(
                       height: 3.6.h,
                       child: Image.asset("assets/images/quotationtype.png"),
                     ),
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: Colors.black26),
+                  ),
+
+                  SizedBox(height: 16), // Replace with `h1`
+
+                  NewCaseTextField(
+                    validator: Validators.noneEmptyValidator,
+                    labelstyle: header11.copyWith(color: Colors.black54),
+                    mediaquery: MediaQuery.of(context).size,
+                    controller: controller.address,
+                    keyboard: TextInputType.name,
+                    label: "Address",
+                    icon: SizedBox(
+                      height: 3.6.h,
+                      child: Image.asset("assets/images/addresa.png"),
                     ),
                   ),
-                  suggestions: controller.quotationtype
-                      .map((e) => SearchFieldListItem(
-                            e,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text(e,
-                                  style:
-                                      header11.copyWith(color: Colors.black)),
+
+                  SizedBox(height: 16), // Replace with `h1`
+
+                  NewCaseTextField(
+                    validator: Validators.noneEmptyValidator,
+                    labelstyle: header11.copyWith(color: Colors.black54),
+                    mediaquery: MediaQuery.of(context).size,
+                    controller: controller.state,
+                    keyboard: TextInputType.name,
+                    label: "State",
+                    icon: SizedBox(
+                      height: 3.6.h,
+                      child: Image.asset("assets/images/quotationtype.png"),
+                    ),
+                  ),
+
+                  SizedBox(height: 16), // Replace with `h1`
+
+                  // Date fields
+                  SizedBox(
+                    height: 56,
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: DateTimePickers(
+                          onChanged: (p0) {
+                            // print(controller.transferdate.text);
+                          },
+                          lastdate: DateTime(2035),
+                          color: Colors.black38,
+                          style: header11,
+                          labelStyle: header11.copyWith(color: Colors.black26),
+                          controller: controller.quotationdate,
+                          // validator: Validators.noneEmptyValidator,
+                          label: " Quotation Date",
+                        )
+                            // NewCaseTextField(
+                            //   validator: Validators.noneEmptyValidator,
+                            //   labelstyle: header11.copyWith(color: Colors.black54),
+                            //   mediaquery: MediaQuery.of(context).size,
+                            //   controller: TextEditingController(),
+                            //   keyboard: TextInputType.name,
+                            //   label: "Quotation Date",
+                            //   icon: SizedBox(
+                            //     height: 3.h,
+                            //     child: Image.asset("assets/images/dateicon.png"),
+                            //   ),
+                            // ),
                             ),
-                          ))
-                      .toList(),
-                ),
-
-                // SizedBox(height: 16),
-
-                // Text fields
-                // NewCaseTextField(
-                //   validator: Validators.noneEmptyValidator,
-                //   labelstyle: header11.copyWith(color: Colors.black54),
-                //   mediaquery: MediaQuery.of(context).size,
-                //   controller: TextEditingController(),
-                //   keyboard: TextInputType.name,
-                //   label: "Quotation Type",
-                //   icon: SizedBox(
-                //     height: 3.6.h,
-                //     child: Image.asset("assets/images/quotationtype.png"),
-                //   ),
-                // ),
-
-                SizedBox(height: 16), // Replace with `h1`
-
-                NewCaseTextField(
-                  validator: Validators.noneEmptyValidator,
-                  labelstyle: header11.copyWith(color: Colors.black54),
-                  mediaquery: MediaQuery.of(context).size,
-                  controller: TextEditingController(),
-                  keyboard: TextInputType.name,
-                  label: "Customer Name",
-                  icon: SizedBox(
-                    height: 3.6.h,
-                    child: Image.asset("assets/images/quotationtype.png"),
-                  ),
-                ),
-
-                SizedBox(height: 16), // Replace with `h1`
-
-                NewCaseTextField(
-                  validator: Validators.noneEmptyValidator,
-                  labelstyle: header11.copyWith(color: Colors.black54),
-                  mediaquery: MediaQuery.of(context).size,
-                  controller: TextEditingController(),
-                  keyboard: TextInputType.name,
-                  label: "Address",
-                  icon: SizedBox(
-                    height: 3.6.h,
-                    child: Image.asset("assets/images/addresa.png"),
-                  ),
-                ),
-
-                SizedBox(height: 16), // Replace with `h1`
-
-                NewCaseTextField(
-                  validator: Validators.noneEmptyValidator,
-                  labelstyle: header11.copyWith(color: Colors.black54),
-                  mediaquery: MediaQuery.of(context).size,
-                  controller: TextEditingController(),
-                  keyboard: TextInputType.name,
-                  label: "State",
-                  icon: SizedBox(
-                    height: 3.6.h,
-                    child: Image.asset("assets/images/quotationtype.png"),
-                  ),
-                ),
-
-                SizedBox(height: 16), // Replace with `h1`
-
-                // Date fields
-                SizedBox(
-                  height: 56,
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: NewCaseTextField(
-                          validator: Validators.noneEmptyValidator,
-                          labelstyle: header11.copyWith(color: Colors.black54),
-                          mediaquery: MediaQuery.of(context).size,
-                          controller: TextEditingController(),
-                          keyboard: TextInputType.name,
-                          label: "Quotation Date",
-                          icon: SizedBox(
-                            height: 3.h,
-                            child: Image.asset("assets/images/dateicon.png"),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: NewCaseTextField(
-                          validator: Validators.noneEmptyValidator,
-                          labelstyle: header11.copyWith(color: Colors.black54),
-                          mediaquery: MediaQuery.of(context).size,
-                          controller: TextEditingController(),
-                          keyboard: TextInputType.name,
+                        Expanded(
+                            child: DateTimePickers(
+                          onChanged: (p0) {
+                            // print(controller.transferdate.text);
+                          },
+                          lastdate: DateTime(2035),
+                          color: Colors.black38,
+                          style: header11,
+                          labelStyle: header11.copyWith(color: Colors.black26),
+                          controller: controller.quotationdate,
+                          // validator: Validators.noneEmptyValidator,
                           label: "Expiry Date",
-                          icon: SizedBox(
-                            height: 3.h,
-                            child: Image.asset("assets/images/dateicon.png"),
-                          ),
-                        ),
-                      ),
-                    ],
+                        )
+                            //  NewCaseTextField(
+                            //   validator: Validators.noneEmptyValidator,
+                            //   labelstyle: header11.copyWith(color: Colors.black54),
+                            //   mediaquery: MediaQuery.of(context).size,
+                            //   controller: TextEditingController(),
+                            //   keyboard: TextInputType.name,
+                            //   label: "Expiry Date",
+                            //   icon: SizedBox(
+                            //     height: 3.h,
+                            //     child: Image.asset("assets/images/dateicon.png"),
+                            //   ),
+                            // ),
+                            ),
+                      ],
+                    ),
                   ),
-                ),
 
-                SizedBox(height: 16), // Replace with `h1`
+                  SizedBox(height: 16), // Replace with `h1`
 
-                // CardDetails widget (to show the list of quotation details)
-                CardDetails(),
-              ],
+                  // CardDetails widget (to show the list of quotation details)
+                  CardDetails(),
+                ],
+              ),
             ),
           ),
         ),
@@ -485,8 +268,7 @@ class CardDetails extends GetView<QuotationController> {
               controller.description.text = details.description.toString();
               controller.products.value = details.products.toString();
               controller.warranty.text = details.warranty.toString();
-              controller.methodapplication.text =
-                  details.method.toString();
+              controller.methodapplication.text = details.method.toString();
               controller.notes.text = details.notes.toString();
               print(details.products.toString());
 
@@ -572,6 +354,10 @@ class CardDetails extends GetView<QuotationController> {
                                 focusedBorder: InputBorder
                                     .none, // No underline when focused
                               ),
+                              onChanged: (value) async {
+                                print(value);
+                                details.title = await value.toString();
+                              },
                             ),
                           ),
                         ),
@@ -602,6 +388,9 @@ class CardDetails extends GetView<QuotationController> {
                                 focusedBorder: InputBorder
                                     .none, // No underline when focused
                               ),
+                              onChanged: (value) {
+                                details.sub_title = value.toString();
+                              },
                             ),
                           ),
                         ),
@@ -632,6 +421,9 @@ class CardDetails extends GetView<QuotationController> {
                                 focusedBorder: InputBorder
                                     .none, // No underline when focused
                               ),
+                              onChanged: (value) async {
+                                details.description = value.toString();
+                              },
                             ),
                           ),
                         ),
@@ -778,6 +570,9 @@ class CardDetails extends GetView<QuotationController> {
                                 focusedBorder: InputBorder
                                     .none, // No underline when focused
                               ),
+                              onChanged: (value) async {
+                                details.warranty = await value.toString();
+                              },
                             ),
                           ),
                         ),
@@ -866,6 +661,9 @@ class CardDetails extends GetView<QuotationController> {
                                 focusedBorder: InputBorder
                                     .none, // No underline when focused
                               ),
+                              onChanged: (value) async {
+                                details.notes = await value.toString();
+                              },
                             ),
                           ),
                         ),
@@ -929,7 +727,7 @@ class CardDetails extends GetView<QuotationController> {
                                         width: 21.w,
                                         child: Center(
                                           child: Text(
-                                            "54",
+                                            details.area.toString(),
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontFamily: Medium),
@@ -961,7 +759,7 @@ class CardDetails extends GetView<QuotationController> {
                                         width: 21.w,
                                         child: Center(
                                           child: Text(
-                                            "",
+                                            details.total_amount.toString(),
                                             style: TextStyle(
                                                 fontSize: 12, fontFamily: Bold),
                                             overflow: TextOverflow.ellipsis,
@@ -977,33 +775,373 @@ class CardDetails extends GetView<QuotationController> {
                               //   endIndent: 10,
                               // ),
                               w1,
-                              Container(
-                                width: 8.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.horizontal(
-                                      right: Radius.circular(10)),
-                                  color: bColor,
-                                ),
-                                height: mediaquer.height,
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
+                              InkWell(
+                                onTap: () {
+                                  controller.totalamount.value = 0.0;
+                                  controller.amountsqft.text =
+                                      details.unit_price.toString();
+                                  controller.approxsqfts.text =
+                                      details.area.toString();
+                                  Get.dialog(
+                                    Dialog(
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 237, 237, 237),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Container(
+                                        width: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                            0.9, // Set width based on screen size
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize
+                                              .min, // Adjust height to fit content
+                                          children: [
+                                            Text(
+                                              "Calculation",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily: Medium),
+                                            ),
+                                            const SizedBox(height: 16),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.white,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    // decoration: BoxDecoration(
+                                                    //   borderRadius: BorderRadius.circular(5),
+                                                    //   color: Colors.red,
+                                                    // ),
+                                                    // color: Colors.red,
+                                                    width: 35.w,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text("Amount/Sqft"),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Expanded(
+                                                    child: TextFormField(
+                                                      onChanged: (value) {
+                                                        controller
+                                                            .calculation();
+                                                      },
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      minLines: 1,
+                                                      maxLines: 10,
+                                                      controller:
+                                                          controller.amountsqft,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: "Value",
+                                                        hintStyle:
+                                                            header11.copyWith(
+                                                          color: Colors.black54,
+                                                        ),
+                                                        // label: Text(
+                                                        //   'Value',
+                                                        //   style:
+                                                        //       header11.copyWith(
+                                                        //     color:
+                                                        //         Colors.black54,
+                                                        //   ),
+                                                        // ),
+                                                        // hintText: 'Enter text',
+                                                        border: InputBorder
+                                                            .none, // Removes the underline
+                                                        enabledBorder: InputBorder
+                                                            .none, // No underline when enabled
+                                                        focusedBorder: InputBorder
+                                                            .none, // No underline when focused
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            h2,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.white,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 35.w,
+                                                    // decoration: BoxDecoration(
+                                                    //   borderRadius: BorderRadius.circular(5),
+                                                    //   color: Colors.red,
+                                                    // ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text("Approx.Sqft"),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Expanded(
+                                                    child: TextFormField(
+                                                      onChanged: (value) {
+                                                        controller
+                                                            .calculation();
+                                                      },
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      minLines: 1,
+                                                      maxLines: 10,
+                                                      controller: controller
+                                                          .approxsqfts,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: "Value",
+                                                        hintStyle:
+                                                            header11.copyWith(
+                                                          color: Colors.black54,
+                                                        ),
+                                                        // label: Text(
+                                                        //   'Value',
+                                                        //   style:
+                                                        //       header11.copyWith(
+                                                        //     color:
+                                                        //         Colors.black54,
+                                                        //   ),
+                                                        // ),
+                                                        // hintText: 'Enter text',
+                                                        border: InputBorder
+                                                            .none, // Removes the underline
+                                                        enabledBorder: InputBorder
+                                                            .none, // No underline when enabled
+                                                        focusedBorder: InputBorder
+                                                            .none, // No underline when focused
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            h2,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.white,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    // decoration: BoxDecoration(
+                                                    //   borderRadius: BorderRadius.circular(5),
+                                                    //   color: Colors.red,
+                                                    // ),
+                                                    width: 35.w,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      "Total Amount",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontFamily: Medium),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Expanded(
+                                                    child: Obx(
+                                                      () => TextFormField(
+                                                        readOnly: true,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        minLines: 1,
+                                                        maxLines: 10,
+                                                        controller: TextEditingController(
+                                                            text: controller
+                                                                    .totalamount
+                                                                    .value
+                                                                    .toString() ??
+                                                                "0"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText: "Value",
+                                                          hintStyle:
+                                                              header11.copyWith(
+                                                            color:
+                                                                Colors.black54,
+                                                          ),
+                                                          // label: Text(
+                                                          //   'Value',
+                                                          //   style:
+                                                          //       header11.copyWith(
+                                                          //     color:
+                                                          //         Colors.black54,
+                                                          //   ),
+                                                          // ),
+                                                          // hintText: 'Enter text',
+                                                          border: InputBorder
+                                                              .none, // Removes the underline
+                                                          enabledBorder: InputBorder
+                                                              .none, // No underline when enabled
+                                                          focusedBorder: InputBorder
+                                                              .none, // No underline when focused
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            h2,
+                                            SubmitButtons(
+                                                isLoading: false.obs,
+                                                onTap: () async {
+                                                  details.area =
+                                                      await controller
+                                                          .approxsqfts.text;
+                                                  details.total_amount =
+                                                      await controller
+                                                          .totalamount.value
+                                                          .toString();
+                                                  details.unit_price =
+                                                      controller
+                                                          .amountsqft.text;
+                                                  controller.quotationlist
+                                                      .refresh();
+                                                  Get.back();
+                                                },
+                                                text: "Submit"),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+
+                                  // Get.dialog(Dialog(
+                                  //   shape: RoundedRectangleBorder(
+                                  //       borderRadius:
+                                  //           BorderRadius.circular(10)),
+                                  //   child: Container(width: 300,
+                                  //     child: Column(
+                                  //       children: [
+                                  //         h1,
+                                  //         Text(
+                                  //           "Calculation",
+                                  //           style: TextStyle(
+                                  //               fontSize: 14, fontFamily: Medium),
+                                  //         ),
+                                  //         Container(
+                                  //           child: Row(
+                                  //             children: [
+                                  //               Container(
+                                  //                   decoration: BoxDecoration(
+                                  //                       borderRadius:
+                                  //                           BorderRadius.circular(
+                                  //                               5),
+                                  //                       color: Colors.red),
+                                  //                   child: Padding(
+                                  //                     padding:
+                                  //                         const EdgeInsets.all(
+                                  //                             8.0),
+                                  //                     child: Text("Amount/Sqft"),
+                                  //                   )),
+                                  //               Container(
+                                  //                 child: Expanded(
+                                  //                   child: NewCaseTextField(
+                                  //                     labelstyle:
+                                  //                         header11.copyWith(
+                                  //                       color: Colors.black54,
+                                  //                     ),
+                                  //                     mediaquery:
+                                  //                         MediaQuery.of(context)
+                                  //                             .size,
+                                  //                     validator: (value) {
+                                  //                       if (value == null ||
+                                  //                           value.isEmpty) {
+                                  //                         // return 'Please enter an email address';
+                                  //                         return "";
+                                  //                       }
+                                  //                       return null;
+                                  //                     },
+                                  //                     controller:
+                                  //                         controller.title,
+                                  //                     keyboard:
+                                  //                         TextInputType.name,
+                                  //                     label: "Title",
+                                  //                     icon: Padding(
+                                  //                       padding:
+                                  //                           const EdgeInsets.only(
+                                  //                               top: 10),
+                                  //                       child: SizedBox(
+                                  //                           height: 25,
+                                  //                           width: 25,
+                                  //                           child: Image.asset(
+                                  //                               "assets/images/titleicon.png")),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               )
+                                  //             ],
+                                  //           ),
+                                  //         )
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ));
+                                },
+                                child: Container(
+                                  width: 8.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.horizontal(
+                                        right: Radius.circular(10)),
+                                    color: bColor,
+                                  ),
+                                  height: mediaquer.height,
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         h2,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                          ),
-                          child: SubmitButtons(
-                              color: const Color.fromARGB(255, 19, 103, 23),
-                              isLoading: false.obs,
-                              onTap: () {},
-                              text: "Update"),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(
+                        //     horizontal: 8,
+                        //   ),
+                        //   child: SubmitButtons(
+                        //       color: const Color.fromARGB(255, 19, 103, 23),
+                        //       isLoading: false.obs,
+                        //       onTap: () {
+                        //         //  controller.quickWage.add(Labourss(
+                        //         //       labourId: labour.labourId.toString(),
+                        //         //       basicWage: labour.dailyWage.toString(),
+                        //         //       overtimeWage:
+                        //         //           labour.overtimeRate?.toString() ??
+                        //         //               "0",
+                        //         //       workdays:
+                        //         //           labour.isdays.value ? "0.5" : "1",
+                        //         //       overtimeduration: "0",
+                        //         //       overtimerate:
+                        //         //           labour.overtimeRate.toString(),
+                        //         //     ));
+                        //         //   } else {
+                        //         //     controller.quickWage.removeWhere(
+                        //         //         (element) =>
+                        //         //             element.labourId ==
+                        //         //             labour.labourId.toString());
+                        //       },
+                        //       text: "Update"),
+                        // ),
                       ],
                     ),
                   ),

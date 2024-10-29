@@ -63,60 +63,61 @@ class Salesquotation extends GetView<QuotationController> {
                           Center(child: loadingthreebounce),
                         ],
                       )
-                    : controller.salequotation == null ||
-                            controller.salequotation!.data.isEmpty
-                        ? Center(
-                            child: Lottie.asset(
-                                // repeat: false,
-                                "assets/images/qrbRtDHknE.json",
-                                height: 250),
-                          )
-                        : ListView.builder(
-                            itemCount: controller.salequotation!.data.length,
-                            itemBuilder: (context, index) {
-                              var details =
-                                  controller.salequotation!.data[index];
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
-                                child: Container(
-                                  // height: ,
-                                  // width: 800,
-
-                                  decoration: BoxDecoration(
-                                      color: bColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 15),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Quotation ID",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontFamily: Medium,
-                                              color: Colors.white),
-                                        ),
-                                        h1,
-                                        Text(
-                                          "Quotation Date",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: regular,
-                                            color: Colors.white,
+                    : Obx(() => 
+                      controller.flterdetails.value.isEmpty
+                          ? Center(
+                              child: Lottie.asset(
+                                  // repeat: false,
+                                  "assets/images/qrbRtDHknE.json",
+                                  height: 250),
+                            )
+                          : ListView.builder(
+                              itemCount: controller.salequotation!.data.length,
+                              itemBuilder: (context, index) {
+                                var details =
+                                    controller.salequotation!.data[index];
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  child: Container(
+                                    // height: ,
+                                    // width: 800,
+                      
+                                    decoration: BoxDecoration(
+                                        color: bColor,
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15  , vertical: 15),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            details.quotationId,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: Medium,
+                                                color: Colors.white),
                                           ),
-                                        ),
-                                      ],
+                                          h1,
+                                          Text(
+                                            details.date,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: regular,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
+                                );
+                              }),
+                    ),
               ),
               init: QuotationController(),
             ))
