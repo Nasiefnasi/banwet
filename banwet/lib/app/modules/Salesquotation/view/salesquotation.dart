@@ -39,7 +39,7 @@ class Salesquotation extends GetView<QuotationController> {
             // ),
             Common2Date(
               ontap: () {
-                // controller.filterAndCalculate();
+                controller.filterQuotaiondate();
                 controller.change();
               },
               statDate: controller.startDateController,
@@ -49,6 +49,7 @@ class Salesquotation extends GetView<QuotationController> {
               onPressed: () {
                 // controller.filteringDates();
                 // controller.filterAndCalculate();
+                 controller.filterQuotaiondate();
                 controller.update();
                 print("<-------------");
               },

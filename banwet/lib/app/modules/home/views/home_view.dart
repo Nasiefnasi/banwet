@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use, prefer_is_empty
 
-import 'package:banwet/app/modules/estimation/view/estimation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -95,8 +94,15 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              Get.to(const SalesEstimation());
+                            onTap: ()async {
+                              // Get.to(const SalesEstimation());
+
+                             await Get.toNamed(Routes.saleEstimation, 
+                            //  arguments: {
+                            //     // "workid": arugumentData["workid"],
+                            //     // "workname": arugumentData["workname"]
+                            //   },
+                              );
                             },
                             child: const banwetIteams(
                               image: 'assets/images/enquiry.png',

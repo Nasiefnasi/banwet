@@ -163,25 +163,26 @@ class QuotationController extends GetxController {
       update();
     }
   }
-   var dateFormat = DateFormat('dd-MM-yyyy');
-  RxList<QuotationList> flterdetails =<QuotationList> [].obs;
-  filterQuotaiondate(){
-    if(salequotation!=null||salequotation!.data!=null){for(int i=0;i<salequotation!.data.length;i++){
-      if(dateFormat
-                  .parse(salequotation!.data[i].createdDate)
-                  .compareTo(DateTime.parse(startDateController.text)) >=
-              0 &&
-          dateFormat
-                  .parse(salequotation!.data[i].createdDate)
-                  .compareTo(DateTime.parse(endDateController.text)) <=
-              0){
-              flterdetails.add(salequotation!.data[i]);  
-              update();
 
+  var dateFormat = DateFormat('dd-MM-yyyy');
+  RxList<QuotationList> flterdetails = <QuotationList>[].obs;
+  filterQuotaiondate() {
+    flterdetails.clear();
+    if (salequotation != null || salequotation!.data != null) {
+      for (int i = 0; i < salequotation!.data.length; i++) {
+        if (dateFormat
+                    .parse(salequotation!.data[i].createdDate)
+                    .compareTo(DateTime.parse(startDateController.text)) >=
+                0 &&
+            dateFormat
+                    .parse(salequotation!.data[i].createdDate)
+                    .compareTo(DateTime.parse(endDateController.text)) <=
+                0) {
+          flterdetails.add(salequotation!.data[i]);
+          update();
+        }
       }
-
-    }}
-    
+    }
   }
 
   QuotationTemplateModel? quotationTemplate;

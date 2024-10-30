@@ -1,10 +1,11 @@
 import 'package:banwet/app/common_widegt/common2date.dart';
+import 'package:banwet/app/modules/estimation/controllers/estimationController.dart';
 import 'package:banwet/app/modules/estimation/view/addestimation.dart';
 import 'package:banwet/app/modules/project_modules/meterial_purchas/materialpurchase_home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SalesEstimation extends StatelessWidget {
+class SalesEstimation extends GetView<Estimationcontroller> {
   const SalesEstimation({super.key});
 
   @override

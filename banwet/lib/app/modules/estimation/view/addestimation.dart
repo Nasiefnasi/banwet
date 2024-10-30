@@ -2,6 +2,7 @@ import 'package:banwet/app/common_widegt/common_icontextform_feild.dart';
 import 'package:banwet/app/common_widegt/datatimepicker.dart';
 import 'package:banwet/app/index.dart';
 import 'package:banwet/app/modules/daily_note/views/add_dailynote.dart';
+import 'package:banwet/app/modules/estimation/controllers/estimationController.dart';
 import 'package:banwet/app/modules/estimation/view/addMaterials.dart';
 import 'package:banwet/app/modules/project_modules/meterial_purchas/materialpurchase_home.dart';
 import 'package:banwet/app/style/const.dart';
@@ -10,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:sizer/sizer.dart';
 
-class Addestimation extends StatelessWidget {
+class Addestimation extends GetView<Estimationcontroller> {
   const Addestimation({super.key});
 
   @override
@@ -184,7 +185,8 @@ class Addestimation extends StatelessWidget {
                         ),
                         // suggestions: controller1.selectedDropdowndataModel!.contractors
                         //     .map(
-                        //       (e) => SearchFieldListItem(
+                        //       (e) =>
+                        // SearchFieldListItem(
                         //         e.contractorName.toString(),
                         //         child: Text(
                         //           "  ${e.contractorName}",
@@ -194,7 +196,22 @@ class Addestimation extends StatelessWidget {
                         //       ),
                         //     )
                         //     .toList(),
-                        suggestions: const [],
+                        suggestions:
+                            controller.estimationDropDownmodel?.customers ==
+                                    null
+                                ? []
+                                : controller.estimationDropDownmodel!.customers
+                                    .map(
+                                      (e) => SearchFieldListItem(
+                                        e.customer_name.toString(),
+                                        child: Text(
+                                          "  ${e.customer_name}",
+                                          style: header10,
+                                        ),
+                                        item: e.customer_name,
+                                      ),
+                                    )
+                                    .toList(),
                         onSuggestionTap: (value) {
                           // controller.contractor.value = value.item.toString();
                           print(value.item.toString());

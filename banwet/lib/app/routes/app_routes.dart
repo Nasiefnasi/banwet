@@ -48,7 +48,7 @@ abstract class Routes {
   static const Homepagedailytask = _Paths.Homepagedailytask;
   static const Documents_project = _Paths.Documents_project;
   static const salequotation = _Paths.salequotation;
-  // static const TravelExpenseView = _Paths.TravelExpenseView;
+  static const saleEstimation = _Paths.saleEstimation;
   // static const HomeView = _Paths.HomeView;
   // static const DailyNoteView = _Paths.DailyNoteView;
   // static const LabourPaymentView = _Paths.LabourPaymentView;
@@ -101,6 +101,7 @@ abstract class _Paths {
   static const Homepagedailytask = '/homepagedailytask';
   static const Documents_project = '/Documents';
   static const salequotation = '/salequotation';
+  static const saleEstimation = '/saleEstimation';
   // static const TravelExpenseView = '/TravelExpenseView';
   // static const HomeView = '/HomeView';
   // static const DailyNoteView = '/DailyNoteView';

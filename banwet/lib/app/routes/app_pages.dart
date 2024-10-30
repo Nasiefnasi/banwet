@@ -1,13 +1,12 @@
 import 'package:banwet/app/modules/Salesquotation/binding/saleQuotation_binding.dart';
 import 'package:banwet/app/modules/Salesquotation/view/salesquotation.dart';
+import 'package:banwet/app/modules/estimation/bindings/estimationbinding.dart';
+import 'package:banwet/app/modules/estimation/view/estimation.dart';
 import 'package:get/get.dart';
 import 'package:banwet/app/modules/Dailytaskdetails/bindings/dailytast_binding.dart';
 import 'package:banwet/app/modules/daily_note/views/homepageside_Task/taskpage.dart';
 import 'package:banwet/app/modules/documents/bindings/document_binding.dart';
 import 'package:banwet/app/modules/documents/views/documents.dart';
-// import 'package:banwet/app/modules/office_expense/bindings/office_expense_binding.dart';
-// import 'package:banwet/app/modules/office_expense/views/office_expense_view.dart';
-// import 'package:banwet/app/modules/project_modules/dailytask/controllers/dailytask_controller.dart';
 import 'package:banwet/app/modules/project_modules/tools/toolTransfer/bindings/renttool_binding.dart';
 import 'package:banwet/app/modules/project_modules/tools/toolconsumption/views/toolconsumption.dart';
 import 'package:banwet/app/modules/projecttask/binding/project_task.dart';
@@ -16,7 +15,6 @@ import 'package:banwet/app/modules/stock/controllers/stockbuild.dart';
 import 'package:banwet/app/modules/stock/model/Stockconsumption/stockconsumptionlist.dart';
 import 'package:banwet/app/modules/stock/model/Stockreport/stockreport.dart';
 import 'package:banwet/app/modules/stock/model/stocktransfer/stocktransfer.dart';
-
 import '../modules/cash/bindings/cash_binding.dart';
 import '../modules/cash/views/cash_view.dart';
 import '../modules/daily_note/bindings/daily_note_binding.dart';
@@ -317,20 +315,10 @@ class AppPages {
       page: () => const Salesquotation(),
       binding: SalesQuotationBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.HomeView,
-    //   page: () => HomeView(),
-    //   binding: HomeBinding(),
-    // ),
-    // GetPage(
-    //   name: _Paths.DailyNoteView,
-    //   page: () => DailyNoteView(),
-    //   binding: DailyNoteBinding(),
-    // ),
-    // GetPage(
-    //   name: _Paths.LabourPaymentView,
-    //   page: () => LabourPaymentView(),
-    //   binding: LabourPaymentBinding(),
-    // ),
+    GetPage(
+      name: _Paths.saleEstimation,
+      page: () => const SalesEstimation(),
+      binding: Estimationbinding(),
+    ),
   ];
 }
