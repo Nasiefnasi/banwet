@@ -73,10 +73,10 @@ class Salesquotation extends GetView<QuotationController> {
                                   height: 250),
                             )
                           : ListView.builder(
-                              itemCount: controller.salequotation!.data.length,
+                              itemCount: controller.flterdetails.value.length,
                               itemBuilder: (context, index) {
                                 var details =
-                                    controller.salequotation!.data[index];
+                                    controller.flterdetails.value[index];
                                 return Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 8),

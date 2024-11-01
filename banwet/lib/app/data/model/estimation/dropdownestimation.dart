@@ -1,12 +1,12 @@
 import 'dart:convert';
 EstimationDropDownList estimationDropDownListFromJson(String str) => EstimationDropDownList.fromJson(json.decode(str));
 String estimationDropDownListToJson(EstimationDropDownList data) => json.encode(data.toJson());
-class EstimationDropDownList {
+class   EstimationDropDownList {
     final bool status;
     // final List<Head> accountHeads;
     // final List<Head> expenseHeads;
     // final List<PaymentMode> paymentModes;
-    // final List<Project> projects;
+    final List<Project> projects;
     // final List<Labour> labours;
     // final List<Type> workTypes;
     // final List<MeasureUnit> measureUnits;
@@ -22,14 +22,14 @@ class EstimationDropDownList {
     // final List<TaxStateCode> taxStateCodes;
     // final List<Map<String, String?>> customers;
     final List<Customer> customers;
-    // final List<SalePriceCategory> salePriceCategories;
+    final List<SalePriceCategory> salePriceCategories;
 
     EstimationDropDownList({
         required this.status,
         // required this.accountHeads,
         // required this.expenseHeads,
         // required this.paymentModes,
-        // required this.projects,
+        required this.projects,
         // required this.labours,
         // required this.workTypes,
         // required this.measureUnits,
@@ -44,7 +44,7 @@ class EstimationDropDownList {
         // required this.services,
         // required this.taxStateCodes,
         required this.customers,
-        // required this.salePriceCategories,
+        required this.salePriceCategories,
     });
 
     factory EstimationDropDownList.fromJson(Map<String, dynamic> json) => EstimationDropDownList(
@@ -52,7 +52,7 @@ class EstimationDropDownList {
         // accountHeads: List<Head>.from(json["account_heads"].map((x) => Head.fromJson(x))),
         // expenseHeads: List<Head>.from(json["expense_heads"].map((x) => Head.fromJson(x))),
         // paymentModes: List<PaymentMode>.from(json["payment_modes"].map((x) => PaymentMode.fromJson(x))),
-        // projects: List<Project>.from(json["projects"].map((x) => Project.fromJson(x))),
+        projects: List<Project>.from(json["projects"].map((x) => Project.fromJson(x))),
         // labours: List<Labour>.from(json["labours"].map((x) => Labour.fromJson(x))),
         // workTypes: List<Type>.from(json["work_types"].map((x) => Type.fromJson(x))),
         // measureUnits: List<MeasureUnit>.from(json["measure_units"].map((x) => MeasureUnit.fromJson(x))),
@@ -67,7 +67,7 @@ class EstimationDropDownList {
         // services: List<Service>.from(json["services"].map((x) => Service.fromJson(x))),
         // taxStateCodes: List<TaxStateCode>.from(json["tax_state_codes"].map((x) => TaxStateCode.fromJson(x))),
         customers: List<Customer>.from(json["customers"].map((x) =>Customer.fromJson(x))),
-        // salePriceCategories: List<SalePriceCategory>.from(json["sale_price_categories"].map((x) => SalePriceCategory.fromJson(x))),
+        salePriceCategories: List<SalePriceCategory>.from(json["sale_price_categories"].map((x) => SalePriceCategory.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -75,7 +75,7 @@ class EstimationDropDownList {
         // "account_heads": List<dynamic>.from(accountHeads.map((x) => x.toJson())),
         // "expense_heads": List<dynamic>.from(expenseHeads.map((x) => x.toJson())),
         // "payment_modes": List<dynamic>.from(paymentModes.map((x) => x.toJson())),
-        // "projects": List<dynamic>.from(projects.map((x) => x.toJson())),
+        "projects": List<dynamic>.from(projects.map((x) => x.toJson())),
         // "labours": List<dynamic>.from(labours.map((x) => x.toJson())),
         // "work_types": List<dynamic>.from(workTypes.map((x) => x.toJson())),
         // "measure_units": List<dynamic>.from(measureUnits.map((x) => x.toJson())),
@@ -91,7 +91,7 @@ class EstimationDropDownList {
         // "tax_state_codes": List<dynamic>.from(taxStateCodes.map((x) => x.toJson())),
         "customers": List<dynamic>.from(customers.map((x) => x.toJson())),
         // List<dynamic>.from(customers.map((x) => Map.from(x).map((k, v) => MapEntry<String, dynamic>(k, v)))),
-        // "sale_price_categories": List<dynamic>.from(salePriceCategories.map((x) => x.toJson())),
+        "sale_price_categories": List<dynamic>.from(salePriceCategories.map((x) => x.toJson())),
     };
 }
 
@@ -287,45 +287,45 @@ class EstimationDropDownList {
 //     };
 // }
 
-// class Project {
-//     final String workId;
-//     final String workName;
+class Project {
+    final String workId;
+    final String workName;
 
-//     Project({
-//         required this.workId,
-//         required this.workName,
-//     });
+    Project({
+        required this.workId,
+        required this.workName,
+    });
 
-//     factory Project.fromJson(Map<String, dynamic> json) => Project(
-//         workId: json["work_id"],
-//         workName: json["work_name"],
-//     );
+    factory Project.fromJson(Map<String, dynamic> json) => Project(
+        workId: json["work_id"],
+        workName: json["work_name"],
+    );
 
-//     Map<String, dynamic> toJson() => {
-//         "work_id": workId,
-//         "work_name": workName,
-//     };
-// }
+    Map<String, dynamic> toJson() => {
+        "work_id": workId,
+        "work_name": workName,
+    };
+}
 
-// class SalePriceCategory {
-//     final int value;
-//     final String name;
+class SalePriceCategory {
+    final int value;
+    final String name;
 
-//     SalePriceCategory({
-//         required this.value,
-//         required this.name,
-//     });
+    SalePriceCategory({
+        required this.value,
+        required this.name,
+    });
 
-//     factory SalePriceCategory.fromJson(Map<String, dynamic> json) => SalePriceCategory(
-//         value: json["value"],
-//         name: json["name"],
-//     );
+    factory SalePriceCategory.fromJson(Map<String, dynamic> json) => SalePriceCategory(
+        value: json["value"],
+        name: json["name"],
+    );
 
-//     Map<String, dynamic> toJson() => {
-//         "value": value,
-//         "name": name,
-//     };
-// }
+    Map<String, dynamic> toJson() => {
+        "value": value,
+        "name": name,
+    };
+}
 
 // class Service {
 //     final String serviceId;
